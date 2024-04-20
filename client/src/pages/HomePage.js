@@ -5,26 +5,58 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Checkbox, Radio } from 'antd';
 import { Prices } from '../components/Prices';
+import { AiOutlineReload } from "react-icons/ai";
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../context/cart';
 
 function HomePage() {
+    const [cart, setCart] = useCart();
+    const navigate = useNavigate();
     // const [auth, setAuth] = useAuth()
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(false);
+    //get total product count
+    const [total, setTotal] = useState(0);
+    const [page, setPage] = useState(1);
 
     //get all products
     const base_url = process.env.REACT_APP_API;
     const getAllProducts = async () => {
         try {
+            setLoading(true);
             const base_url = process.env.REACT_APP_API;
-            const { data } = await axios.get(`${base_url}/api/v1/product/get-product`);
+            const { data } = await axios.get(`${base_url}/api/v1/product/product-list/${page}`);
             if (data.success) {
                 setProducts(data.products);
             }
+            setLoading(false);
         } catch (error) {
             console.log(error);
-            toast.error('Something went wrong in getting products')
+            toast.error('Something went wrong in getting products');
+            setLoading(false);
         }
     }
 
+    //load more
+    const loadMore = async () => {
+        try {
+            setLoading(true);
+            const base_url = process.env.REACT_APP_API;
+            const { data } = await axios.get(`${base_url}/api/v1/product/product-list/${page}`);
+            if (data.success) {
+                setProducts([...products, ...data?.products]);
+            }
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+            console.log(error);
+            toast.error('Something went wrong in getting products');
+        }
+    }
+    useEffect(() => {
+        if (page === 1) return;
+        loadMore();
+    }, [page])
 
     //----------------------------------------------------------------------------
     const [categories, setCategories] = useState([]);
@@ -46,9 +78,7 @@ function HomePage() {
     }
 
 
-    //get total product count
-    const [total, setTotal] = useState(0);
-    const [page, setPage] = useState(1);
+
     //get Total count of products
     const getTotal = async () => {
         try {
@@ -144,15 +174,38 @@ function HomePage() {
                                         <h5 className="card-title"> {p.name} </h5>
                                         <p className="card-text"> {p.description} </p>
                                         <p>{p.price}</p>
-                                        <button className='btn btn-outline-dark ms-2'>More Details</button>
-                                        <button className='btn btn-outline-success ms-2'>Add to Cart</button>
+                                        <button className='btn btn-outline-dark ms-2' onClick={() => { navigate(`/product/${p.slug}`) }}>More Details</button>
+                                        <button className='btn btn-outline-success ms-2'
+                                            onClick={() => {
+                                                setCart([...cart, p]);
+                                                localStorage.setItem('cart', JSON.stringify([...cart, p]))
+                                            }}
+                                        >Add to Cart</button>
                                     </div>
                                 </div>
                             ))
                         }
                     </div>
                     <div className='m-2 p-3'>
-                        {/* {products && products.length  } */}
+                        {products && products.length < total && (
+                            <button
+                                className="btn btn-primary loadmore"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setPage(page + 1);
+                                }}
+                            >
+                                {loading ? (
+                                    "Loading ..."
+                                ) : (
+                                    <>
+                                        {" "}
+                                        Loadmore
+                                        <AiOutlineReload />
+                                    </>
+                                )}
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>

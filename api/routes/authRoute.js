@@ -1,5 +1,5 @@
 const express = require('express');
-const { registerController, loginController, testController } = require('../controllers/authController');
+const { registerController, loginController, testController, updateProfileController } = require('../controllers/authController');
 const { requireSignIn, isAdmin } = require('../middlewares/authMiddleware');
 //router object
 
@@ -25,6 +25,9 @@ router.get('/admin-auth', requireSignIn, isAdmin, (req, res) => {
     res.status(200).send({ ok: true });
 })
 
+
+//update profile
+router.put("/profile-update", requireSignIn, updateProfileController);
 
 //test routes
 router.get('/test', requireSignIn, isAdmin, testController);

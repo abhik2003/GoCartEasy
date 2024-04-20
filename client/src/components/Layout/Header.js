@@ -3,9 +3,12 @@ import { NavLink, Link } from 'react-router-dom'
 import './Header.css'
 import { useAuth } from '../../context/auth'
 import { toast } from 'react-toastify';
+import SearchInput from '../Form/SearchInput';
+import { useCart } from '../../context/cart';
 
 function Header() {
     const [auth, setAuth] = useAuth();
+    const [cart, setCart] = useCart();
     const handleLogout = () => {
         setAuth({
             ...auth,
@@ -26,6 +29,7 @@ function Header() {
                         <Link to="/" className="navbar-brand" style={{ textTransform: 'capitalize', letterSpacing: '1px' }} >
                             GoCartEasy </Link>
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <SearchInput />
                             <li className="nav-item">
                                 <NavLink
                                     to="/"
@@ -100,7 +104,7 @@ function Header() {
                                     to="/cart"
                                     className="nav-link"
                                 >
-                                    Cart (0)
+                                    Cart ({cart.length})
                                 </NavLink>
                             </li>
                         </ul>

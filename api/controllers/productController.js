@@ -231,7 +231,7 @@ const productCountController = async (req, res) => {
 
 const productListController = async (req, res) => {
     try {
-        const perPage = 6;
+        const perPage = 1;
         const page = req.params.page ? req.params.page : 1;
         const products = await productModel
             .find({})
@@ -252,5 +252,56 @@ const productListController = async (req, res) => {
         })
     }
 }
+const searchProductController = async (req, res) => {
+    try {
+        const keyword = req.params.keyword;
+        const result = await productModel
+            .find({
+                $or: [
+                    { name: { $regex: keyword, $options: "i" } },
+                    { description: { $regex: keyword, $options: "i" } }
+                ]
+            })
+            .select("-photo")
+        res.status(200).send({
+            success: true,
+            products: result
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: 'Error in search products'
+        })
+    }
+}
 
-module.exports = { createProductController, getAllProductsController, getSingleProductController, getProductPhotoController, deleteProductController, updateProductController, filterProductController, productCountController, productListController };
+// similar products
+const realtedProductController = async (req, res) => {
+    try {
+        const { pid, cid } = req.params;
+        const products = await productModel
+            .find({
+                category: cid,
+                // _id: { $ne: pid },
+            })
+            .select("-photo")
+            .limit(3)
+            .populate("category");
+        res.status(200).send({
+            success: true,
+            products,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(400).send({
+            success: false,
+            message: "error while geting related product",
+            error,
+        });
+    }
+};
+
+
+
+module.exports = { createProductController, getAllProductsController, getSingleProductController, getProductPhotoController, deleteProductController, updateProductController, filterProductController, productCountController, productListController, searchProductController, realtedProductController };
