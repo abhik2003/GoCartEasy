@@ -125,7 +125,7 @@ const CartPage = () => {
                                 </div>
                             ))}
                         </div>
-                        <div className="col-md-5 cart-summary ">
+                        <div className="col-md-5 cart-summary">
                             <h2>Cart Summary</h2>
                             <p>Total | Checkout | Payment</p>
                             <hr />
@@ -174,9 +174,9 @@ const CartPage = () => {
                                         <DropIn
                                             options={{
                                                 authorization: clientToken,
-                                                paypal: {
-                                                    flow: "vault",
-                                                },
+                                                // paypal: {                    //to use paypal account linking is required
+                                                //     flow: "vault",
+                                                // },
                                             }}
                                             onInstance={(instance) => setInstance(instance)}
                                         />

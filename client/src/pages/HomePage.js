@@ -8,6 +8,7 @@ import { Prices } from '../components/Prices';
 import { AiOutlineReload } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/cart';
+// import banner from '/public/images/banner2.png'
 
 function HomePage() {
     const [cart, setCart] = useCart();
@@ -137,6 +138,11 @@ function HomePage() {
         <Layout>
             {/* <pre>{JSON.stringify(checked, null)}</pre> */}
             <div className='row mt-3'>
+                <div>
+                    <img src="/images/banner.png"
+                        width={"100%"}
+                    ></img>
+                </div>
                 <div className="col-md-3 ps-5">
                     <h6 className="text-center">Filter by Category</h6>
                     {

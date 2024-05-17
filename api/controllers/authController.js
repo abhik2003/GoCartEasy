@@ -1,5 +1,6 @@
 const { hashPassword, comparePassword } = require('../helpers/authHelper');
 const userModel = require('../models/userModel');
+const orderModel = require('../models/orderModel');
 const jwt = require('jsonwebtoken');
 
 const registerController = async (req, res) => {
@@ -150,6 +151,64 @@ const updateProfileController = async (req, res) => {
     }
 };
 
+//orders
+const getOrdersController = async (req, res) => {
+    try {
+        const orders = await orderModel
+            .find({ buyer: req.user._id })
+            .sort({ createdAt: -1 }) // Sort by createdAt field in descending order
+            .populate("products", "-photo")
+            .populate("buyer", "name");
+        res.json(orders);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: 'Error while getting all orders'
+        })
+    }
+}
+
+//all orders
+const getAllOrdersController = async (req, res) => {
+    try {
+        const orderds = await orderModel
+            .find({})
+            .sort({ createdAt: -1 }) // Sort by createdAt field in descending order
+            .populate("products", "-photo")
+            .populate("buyer", "name");
+            
+        res.json(orderds);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: 'Error while getting all orders'
+        })
+    }
+}
+
+//order status controller : to change the status of the order
+const orderStatusController = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const { status } = req.body;
+    const orders = await orderModel.findByIdAndUpdate(
+      orderId,
+      { status },
+      { new: true }
+    );
+    res.json(orders);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error While Updateing Order",
+      error,
+    });
+  }
+};
+
 //test router
 const testController = (req, res) => {
     res.send({
@@ -158,4 +217,4 @@ const testController = (req, res) => {
 }
 
 
-module.exports = { registerController, loginController, testController, updateProfileController };
+module.exports = { registerController, loginController, testController, updateProfileController, getOrdersController, getAllOrdersController, orderStatusController };

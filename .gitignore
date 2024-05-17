@@ -1,0 +1,12 @@
+/api/node_modules
+/client/node_modules
+/api/.env
+/client/.env
+
+
+.vscode
+
+.DS_Store
+api/.DS_Store
+client/.DS_Store
+
