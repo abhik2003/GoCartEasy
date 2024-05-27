@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../components/Layout/Layout'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios';
+import { useCart } from '../context/cart';
 
 const ProductDetails = () => {
+    const [cart, setCart] = useCart();
     const params = useParams();
     const [product, setProduct] = useState({});
     const [relatedProducts, setRelatedProducts] = useState([]);
@@ -47,7 +49,7 @@ const ProductDetails = () => {
             <div className="row container product-details mt-4">
                 <div className="col-md-6">
                     <img
-                        src={`/api/v1/product/product-photo/${product._id}`}
+                        src={`${base_url}/api/v1/product/product-photo/${product._id}`}
                         className="card-img-top"
                         alt={product.name}
                         height="300px"
@@ -67,7 +69,12 @@ const ProductDetails = () => {
                         })}
                     </h6>
                     <h6>Category : {product?.category?.name}</h6>
-                    <button class="btn btn-secondary ms-1">ADD TO CART</button>
+                    <button class="btn btn-secondary ms-1"
+                        onClick={() => {
+                                        setCart([...cart, product]);
+                                        localStorage.setItem('cart', JSON.stringify([...cart, product]))
+                                    }}
+                    >ADD TO CART</button>
                 </div>
             </div>
             <hr />
@@ -87,7 +94,12 @@ const ProductDetails = () => {
                                 <p className="card-text"> {p.description} </p>
                                 <p>{p.price}</p>
                                 <button className='btn btn-outline-dark ms-2' onClick={() => { navigate(`/product/${p.slug}`) }}>More Details</button>
-                                <button className='btn btn-outline-success ms-2'>Add to Cart</button>
+                                <button className='btn btn-outline-success ms-2'
+                                    onClick={() => {
+                                                setCart([...cart, p]);
+                                                localStorage.setItem('cart', JSON.stringify([...cart, p]))
+                                            }}
+                                >Add to Cart</button>
                             </div>
                         </div>
 
