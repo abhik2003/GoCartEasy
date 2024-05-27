@@ -1,0 +1,25 @@
+.card-img-container{
+    overflow: hidden;
+}
+.card:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.card-text{
+    color: rgb(141, 141, 141);
+    font-size: 13px;
+}
+.card-price{
+    color: black;
+    font-weight: 600;
+    font-size: 17px;
+}
+.product-card-img{
+    max-height: 380px;
+    transition: transform 0.3s ease;
+}
+.card:hover .product-card-img{
+    transform: scale(1.1);
+}
+.card:hover .card-title{
+    color: rgb(1, 153, 255);
+}

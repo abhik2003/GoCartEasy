@@ -1,0 +1,12 @@
+.product-details-name{
+    font-size: 30px;
+    font-weight: 400;
+}
+.product-details-description{
+    font-size: 15px;
+    color: rgba(53, 53, 53, 0.802);
+    padding-bottom: 10px;
+}
+.product-details-price{
+    font-size: 30px;
+}
