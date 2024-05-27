@@ -8,8 +8,9 @@ import moment from 'moment';
 function Orders() {
     const [orders, setOrders] = useState([]);
     const [auth, setAuth] = useAuth();
+    const base_url = process.env.REACT_APP_API;
     const getOrderds = async () => {
-        const { data } = await axios.get("/api/v1/auth/orders");
+        const { data } = await axios.get(`${base_url}/api/v1/auth/orders`);
         console.log(data);
         setOrders(data);
     }
@@ -53,7 +54,7 @@ function Orders() {
                                             <div className="row mb-2 p-3 card flex-row" key={p._id}>
                                                 <div className="col-md-4">
                                                 <img
-                                                    src={`/api/v1/product/product-photo/${p._id}`}
+                                                    src={`${base_url}/api/v1/product/product-photo/${p._id}`}
                                                     className="card-img-top"
                                                     alt={p.name}
                                                     width="100px"
