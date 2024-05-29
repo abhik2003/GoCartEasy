@@ -7,6 +7,7 @@ import { Checkbox, Radio } from "antd";
 import { Prices } from "../components/Prices";
 import { AiOutlineReload } from "react-icons/ai";
 import ProductCard from "../components/ProductCard";
+import './HomePage.css';
 // import banner from '/public/images/banner2.png'
 
 function HomePage() {
@@ -136,10 +137,49 @@ function HomePage() {
   }, [checked, pricerange]);
   return (
     <Layout>
-      {/* <pre>{JSON.stringify(checked, null)}</pre> */}
-      <div className="row mt-3">
-        <div>
-          <img src="/images/banner.png" width={"100%"}></img>
+      <div className="row">
+        <div className="row" style={{ background: "rgb(250,248,245)" }}>
+          <div
+            className="col-md-6 banner-image-top-container text-center"
+          >
+            <img
+              src="/images/banner-woman-sitting.png"
+              width={"100%"}
+              className="banner-image-top"
+            ></img>
+          </div>
+          <div
+            className="col-md-6 text-center"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <img
+              src="/images/logo-gocarteasy-transparent-black.png"
+              style={{ height: "120px" }}
+            ></img>
+            <h1 style={{ fontFamily: "sevillana-regular" }}>
+              Shop. Click. Enjoy
+            </h1>
+            <p>
+              Discover Quality, Convenience, and Affordability – Your Premier
+              Destination for All Your Shopping Needs
+            </p>
+            <button
+              style={{
+                padding: "8px",
+                border: "1px solid black",
+                background: "rgb(25,40,115",
+                color: "white",
+                borderRadius: "5px",
+              }}
+            >
+              Shop Now
+            </button>
+          </div>
         </div>
         <div className="col-md-3 ps-5 mt-5">
           <h6 className="text-center">Filter by Category</h6>
@@ -183,7 +223,7 @@ function HomePage() {
             style={{ justifyContent: "space-around" }}
           >
             {products.map((product) => (
-                <ProductCard product={product} key={ product._id} />
+              <ProductCard product={product} key={product._id} />
             ))}
           </div>
           <div className="m-2 p-3">

@@ -1,0 +1,37 @@
+.banner-image-top-container{
+    padding: 50px;
+}
+.banner-image-top {
+    border-radius: 60px;
+}
+
+
+
+@media (max-width: 768px) {
+    .banner-image-top {
+        border-radius: 30px;
+    }
+    .banner-image-top-container{
+        padding: 10px;
+    }
+
+}
+@media (max-width: 768px) { 
+    /* mobile */
+    .banner-image-top {
+        border-radius: 30px;
+    }
+    .banner-image-top-container{
+        padding: 10px;
+    }
+
+}
+@media (min-width: 769px) and (max-width: 1024px) { 
+    /* tablet */
+    .banner-image {
+        border-radius: 45px;
+    }
+    .banner-image-top-container {
+        padding: 2%;
+    }
+}

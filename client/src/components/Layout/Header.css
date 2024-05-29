@@ -3,9 +3,10 @@
     font-size: 17px;
     line-height: 26px;
     text-transform: uppercase;
-    box-shadow: 0 8px 6px -6px gray;
-    --webkit-box-shadow: 0 8px 6px -6px gray;
-    border-bottom: 0px solid gray !important;
+    /* box-shadow: 0 8px 6px -6px gray; */
+    /* --webkit-box-shadow: 0 8px 6px -6px gray; */
+    /* border-bottom: 0px solid gray !important; */
+    background-color: rgb(250, 248, 245) !important;
 }
 
 .nav-link {
@@ -13,7 +14,7 @@
 }
 
 .active {
-    border-bottom: 2px solid black;
+    /* border-bottom: 2px solid black; */
 }
 
 .navbar-brand {

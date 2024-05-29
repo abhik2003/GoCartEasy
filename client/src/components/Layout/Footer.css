@@ -1,13 +1,7 @@
 .footer {
     color: white;
     padding: 25px;
-    background: #000000;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right,
-            #434343,
-            #000000);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #434343, #000000);
+    background: rgb(19, 24, 38);
 }
 
 .footer h1 {
@@ -22,5 +16,16 @@
 
 .footer a:hover {
     color: #ffefba;
-    border-bottom: 1px solid #ffefba;
+}
+.input-group input{
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 80%;
+}
+.newsletter-form button{
+    margin-top: 10px;
+    width: 80%;
+    padding: 8px;
+    border-radius: 10px;
 }

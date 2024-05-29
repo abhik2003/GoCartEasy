@@ -1,12 +1,12 @@
 .cart-page {
-    margin-top: 64px;
+    margin-top: 0px;
 }
 
 .cart-page h1 {
     padding: 15px !important;
     font-family: "roboto", sans-serif;
     font-weight: normal;
-    background-color: rgba(0, 0, 255, 0.072) !important;
+    background-color: rgb(250, 248, 245) !important;
 }
 
 .cart-page h1>p {
@@ -28,5 +28,28 @@
 
 .cart-page .cart-summary {
     text-align: center;
+    margin: auto;
+    padding-left: 20px;
     /* margin-top: -140px !important; */
+}
+.cart-page-product-card{
+    border: 1px solid rgba(0, 0, 0, 0.178);
+    border-radius: .375rem;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+
+/* Apply the hover effect to the entire cart page product card */
+.cart-page-product-card:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Ensure no extra styles are applied to child elements */
+.cart-page-product-card .col-md-3,
+.cart-page-product-card .col-md-6,
+.cart-page-product-card .col-md-3 img,
+.cart-page-product-card .cart-remove-btn button {
+    box-shadow: none;
 }
