@@ -93,10 +93,10 @@ npm start
 ```
 ### 5. Frontend Setup
 
-Open a new terminal window, navigate to the \`frontend\` directory, and install the required dependencies.
+Open a new terminal window, navigate to the `client` directory, and install the required dependencies.
 
 ```bash
-cd frontend
+cd client
 npm install
 ```
 
