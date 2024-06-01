@@ -170,7 +170,11 @@ const updateProductController = async (req, res) => {
 
         }
         else {
-            const product = await productModel.findByIdAndUpdate(id, { ...req.fields, slug: slugify(name) }, { new: true });
+            delete req.fields.photo;
+            const existingProduct = await productModel.findById(id);
+            const product = await productModel.findByIdAndUpdate(id,
+                { ...req.fields, slug: slugify(name) },
+                { new: true });
 
         }
 
@@ -287,7 +291,7 @@ const realtedProductController = async (req, res) => {
         const products = await productModel
             .find({
                 category: cid,
-                // _id: { $ne: pid },
+                _id: { $ne: pid } //exclude the current product
             })
             .select("-photo")
             .limit(3)

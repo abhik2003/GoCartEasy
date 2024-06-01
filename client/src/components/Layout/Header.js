@@ -39,7 +39,11 @@ function Header() {
             <Link
               to="/"
               className="navbar-brand"
-              style={{ textTransform: "capitalize", letterSpacing: "1px", paddingLeft: "10px" }}
+              style={{
+                textTransform: "capitalize",
+                letterSpacing: "1px",
+                paddingLeft: "10px",
+              }}
             >
               GoCartEasy{" "}
             </Link>
